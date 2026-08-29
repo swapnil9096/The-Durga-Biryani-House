@@ -106,8 +106,8 @@ export const restaurant = {
   /** Free-delivery threshold (₹). Set to 0 to disable. */
   freeDeliveryOver: 499,
 
-  /** Canonical site URL — used for metadata, sitemap, OG tags. */
-  siteUrl: "https://durgabiryanihouse.example", // ⚠️ Replace with real domain
+  /** Canonical site URL — used for metadata, sitemap, OG tags. No trailing slash. */
+  siteUrl: "https://the-durga-biryani-house.vercel.app",
 } as const;
 
 /** One-line, comma-joined full address. */
