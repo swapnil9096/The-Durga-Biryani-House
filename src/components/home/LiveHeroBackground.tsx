@@ -65,8 +65,13 @@ export function LiveHeroBackground() {
 
   return (
     <div ref={rootRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
-      {/* Layer 1 — HD biryani base, slow ambient Ken Burns + scroll parallax. */}
-      <div ref={baseRef} className="absolute inset-0 will-change-transform">
+      {/* Layer 1 — HD biryani base. Oversized (overscan) so the scroll parallax
+          translate never exposes the dark section behind it. */}
+      <div
+        ref={baseRef}
+        className="absolute -inset-x-0 will-change-transform"
+        style={{ top: "-25%", bottom: "-25%" }}
+      >
         <div className="absolute inset-0 [animation:var(--animate-hero-zoom)]">
           <SmartImage
             src="/images/menu/hero-biryani.jpg"
