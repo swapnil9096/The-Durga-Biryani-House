@@ -70,6 +70,7 @@ export function CartDrawer() {
               description="Add some delicious biryani to get started."
               actionLabel="Browse the menu"
               actionHref="/menu"
+              onAction={closeCart}
             />
           </div>
         ) : (

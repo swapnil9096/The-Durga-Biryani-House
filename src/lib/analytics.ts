@@ -21,6 +21,8 @@ export type AnalyticsEvent =
   | "checkout_started"
   | "order_clicked"
   | "whatsapp_order_clicked"
+  | "whatsapp_clicked"
+  | "instagram_clicked"
   | "call_clicked"
   | "directions_clicked"
   | "offer_clicked";

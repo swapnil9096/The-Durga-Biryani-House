@@ -14,9 +14,9 @@ export const metadata: Metadata = pageMetadata({
   path: "/reviews",
 });
 
-const hasDemo = reviews.some((r) => r.demo);
-
 export default function ReviewsPage() {
+  const hasReviews = reviews.length > 0;
+
   return (
     <>
       <PageHeader
@@ -24,30 +24,32 @@ export default function ReviewsPage() {
         crumbs={[{ name: "Reviews", path: "/reviews" }]}
       />
       <div className="container-px mx-auto max-w-7xl py-12">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <StarRating value={averageRating} size={24} />
-          <p className="text-charcoal-600">
-            <span className="font-display text-2xl font-bold text-charcoal-900">
-              {averageRating.toFixed(1)}
-            </span>{" "}
-            average from {reviews.length} reviews
-          </p>
-        </div>
+        {hasReviews ? (
+          <>
+            <div className="flex flex-col items-center gap-3 text-center">
+              <StarRating value={averageRating} size={24} />
+              <p className="text-charcoal-600">
+                <span className="font-display text-2xl font-bold text-charcoal-900">
+                  {averageRating.toFixed(1)}
+                </span>{" "}
+                average from {reviews.length} reviews
+              </p>
+            </div>
 
-        {hasDemo && (
-          <p className="mx-auto mt-6 max-w-2xl rounded-xl border border-gold-200 bg-gold-50 px-4 py-3 text-center text-sm text-gold-800">
-            Note: the reviews below are sample/demo content for preview only and
-            will be replaced with genuine customer reviews.
+            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {reviews.map((review, i) => (
+                <Reveal key={review.id} delay={(i % 3) * 70}>
+                  <ReviewCard review={review} />
+                </Reveal>
+              ))}
+            </div>
+          </>
+        ) : (
+          <p className="mx-auto max-w-2xl text-center text-charcoal-600">
+            We&apos;re just getting started — customer reviews will appear here soon.
+            Enjoyed your meal? We&apos;d love to hear from you.
           </p>
         )}
-
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {reviews.map((review, i) => (
-            <Reveal key={review.id} delay={(i % 3) * 70}>
-              <ReviewCard review={review} />
-            </Reveal>
-          ))}
-        </div>
 
         <div className="mt-12 text-center">
           <Button href="/menu" size="lg">

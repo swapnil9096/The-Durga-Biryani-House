@@ -118,22 +118,31 @@
   }
 }
 
-/* ── AssemblyScene: fixed page-wide biryani background ──
-   Pre-JS / no-JS fallback (data-scroll="off"): show the finished photo and
-   hide the pieces, so a slow or failed bundle can never leave a scattered,
-   broken-looking dish. Once JS is ready it sets data-scroll="on" and writes
-   each piece's transform/opacity inline from scroll progress. */
-.pa-scene-piece {
+/* ── BiryaniAssembly: fixed, full-page scroll-scrubbed cooking sequence ──
+   Pre-JS / no-JS fallback: the full finished still (.assembly-final) is shown
+   and the falling bands are hidden, so a slow or failed bundle can never leave
+   a broken, half-assembled dish. Once JS is ready it flips data-active="on" —
+   hiding the still and driving each band's transform inline from whole-page
+   scroll progress. */
+.assembly-band {
   opacity: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
-/* Circle clip so the resting photo matches the circular union of the wedges —
-   otherwise the dish snaps from a circle to a hard square as it finishes. */
-.pa-scene-final {
+.assembly-final {
   opacity: 1;
-  clip-path: circle(50% at 50% 50%);
 }
-.pa-scene[data-scroll="on"] .pa-scene-final {
-  opacity: 0; /* JS raises this back to 1 near the end of the page. */
+/* Trim decorative particles on small screens. */
+@media (max-width: 640px) {
+  .assembly-steam-extra {
+    display: none;
+  }
+}
+.assembly-stage[data-active="on"] .assembly-band {
+  opacity: 1;
+}
+.assembly-stage[data-active="on"] .assembly-final {
+  opacity: 0;
 }
 
 /* Scroll cue — the little mouse dot bobs to invite scrolling. */
@@ -277,11 +286,12 @@
   .hero-particle {
     display: none;
   }
-  /* AssemblyScene: present the finished dish, never a scatter. */
-  .pa-scene-piece {
+  /* BiryaniAssembly: present the finished dish immediately — no scrub, no
+     falling bands, no steam. */
+  .assembly-band {
     display: none;
   }
-  .pa-scene-final {
+  .assembly-final {
     opacity: 1 !important;
   }
 }

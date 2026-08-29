@@ -181,7 +181,7 @@ export function CheckoutForm() {
               <WhatsAppGlyph /> Send Order via WhatsApp
             </Button>
             <Button
-              variant="ghost"
+              variant="outline"
               size="lg"
               onClick={() => setConfirmed(false)}
               className="w-full sm:w-auto"

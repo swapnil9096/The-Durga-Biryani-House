@@ -36,7 +36,7 @@ export function EmptyState({
       {actionLabel && (actionHref || onAction) && (
         <div className="mt-5">
           {actionHref ? (
-            <Button href={actionHref} size="sm">
+            <Button href={actionHref} size="sm" onClick={onAction}>
               {actionLabel}
             </Button>
           ) : (

@@ -5,7 +5,7 @@ import { featuredOffer } from "@/data/offers";
 import { HeroAssemble } from "./HeroAssemble";
 
 /**
- * Hero copy only. The biryani imagery now lives in <AssemblyScene />, a fixed
+ * Hero copy only. The biryani imagery lives in <BiryaniAssembly />, a fixed
  * background that assembles across the whole page, so the hero is transparent
  * and simply lays its text over that scene.
  */

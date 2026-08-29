@@ -73,8 +73,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const { children, ...rest } = props as ButtonAsButton;
+    // Strip our styling props so they neither leak onto the DOM node nor
+    // (in className's case) override the computed classes when spread.
+    const domProps = { ...rest } as Record<string, unknown>;
+    delete domProps.variant;
+    delete domProps.size;
+    delete domProps.className;
     return (
-      <button ref={ref} className={classes} {...rest}>
+      <button ref={ref} className={classes} {...domProps}>
         {children}
       </button>
     );

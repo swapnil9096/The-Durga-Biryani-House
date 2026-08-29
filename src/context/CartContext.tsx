@@ -32,7 +32,23 @@ type CartAction =
   | { type: "setExtra"; id: string; quantity: number }
   | { type: "clear" };
 
+/**
+ * Extras (raita, salad, …) are add-ons to a main order, never an order on
+ * their own. Once the last main item leaves the cart, drop any lingering
+ * extras so the cart reads as genuinely empty.
+ */
+function normalize(state: CartState): CartState {
+  if (state.items.length === 0 && Object.keys(state.extras).length > 0) {
+    return { ...state, extras: {} };
+  }
+  return state;
+}
+
 function reducer(state: CartState, action: CartAction): CartState {
+  return normalize(baseReducer(state, action));
+}
+
+function baseReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "hydrate":
       return { items: action.items, extras: action.extras };

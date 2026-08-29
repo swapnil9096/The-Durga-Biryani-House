@@ -25,8 +25,8 @@ export function SignatureBiryanis() {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
-          <Button href="/menu" variant="outline" size="lg">
+        <div className="mt-6 text-center sm:mt-8">
+          <Button href="/menu" variant="primary" size="lg">
             Explore Full Menu
           </Button>
         </div>

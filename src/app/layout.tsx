@@ -11,6 +11,7 @@ import { Footer } from "@/components/layout/Footer";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { PlaceholderNotice } from "@/components/layout/PlaceholderNotice";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { FloatingCartButton } from "@/components/cart/FloatingCartButton";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -90,6 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Footer />
             <MobileBottomNav />
             <CartDrawer />
+            <FloatingCartButton />
             <BackToTop />
           </CartProvider>
         </ToastProvider>
