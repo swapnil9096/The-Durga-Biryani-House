@@ -1,21 +1,16 @@
-"use client";
-
-import {
-  createElement,
-  useEffect,
-  useState,
-  type CSSProperties,
-  type ReactNode,
-} from "react";
+import { createElement, type CSSProperties, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Tag = "div" | "span" | "p" | "h1" | "ul";
 
 /**
  * Product-assembly entrance: the piece starts offset (x/y/scale/rotation) and
- * flies into place on mount, staggered by `delay`. Uses the `.assemble` /
- * `.is-assembled` CSS pair so reduced-motion users get the settled state
- * immediately.
+ * flies into place, staggered by `delay`.
+ *
+ * Driven by a CSS animation rather than a JS-toggled class so the copy is
+ * never gated on hydration — on a slow connection the hero would otherwise
+ * sit invisible until the bundle lands. Reduced motion is handled by the
+ * `.assemble` override in globals.css.
  */
 export function HeroAssemble({
   as = "div",
@@ -36,22 +31,16 @@ export function HeroAssemble({
   rot?: string;
   delay?: number;
 }) {
-  const [assembled, setAssembled] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setAssembled(true), delay);
-    return () => clearTimeout(t);
-  }, [delay]);
-
   return createElement(
     as,
     {
-      className: cn("assemble", assembled && "is-assembled", className),
+      className: cn("assemble", className),
       style: {
         "--a-x": x,
         "--a-y": y,
         "--a-scale": scale,
         "--a-rot": rot,
+        animationDelay: `${delay}ms`,
       } as CSSProperties,
     },
     children

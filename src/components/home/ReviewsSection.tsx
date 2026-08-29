@@ -8,7 +8,7 @@ export function ReviewsSection() {
   if (featuredReviews.length === 0) return null;
 
   return (
-    <section aria-labelledby="reviews-heading" className="bg-charcoal-950 py-16 text-cream-50 sm:py-24">
+    <section aria-labelledby="reviews-heading" className="py-16 text-cream-50 sm:py-24">
       <div className="container-px mx-auto max-w-7xl">
         <div className="flex flex-col items-center text-center">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">

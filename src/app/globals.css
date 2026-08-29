@@ -69,9 +69,6 @@
   --animate-shimmer: shimmer 1.6s linear infinite;
   --animate-marquee: marquee 26s linear infinite;
 
-  /* Live hero */
-  --animate-hero-zoom: hero-zoom 24s ease-in-out infinite alternate;
-  --animate-steam: steam 9s ease-in-out infinite;
 }
 
 @keyframes fade-in {
@@ -101,20 +98,6 @@
 
 /* ── Live hero: ambient motion (always-on, independent of scroll) ── */
 
-/* Slow cinematic zoom/pan on the base biryani photo (Ken Burns). */
-@keyframes hero-zoom {
-  from { transform: scale(1.06) translate3d(0, 0, 0); }
-  to   { transform: scale(1.14) translate3d(-1.5%, -2%, 0); }
-}
-
-/* Rising steam/glow columns behind the plate. */
-@keyframes steam {
-  0%   { opacity: 0; transform: translate3d(0, 24px, 0) scaleY(0.8); }
-  25%  { opacity: 0.5; }
-  50%  { opacity: 0.35; transform: translate3d(0, -30px, 0) scaleY(1.15); }
-  100% { opacity: 0; transform: translate3d(0, -80px, 0) scaleY(1.3); }
-}
-
 /*
  * Particles float upward forever (gravity-defying). Distance/rotation are
  * driven by CSS custom props set per-particle so each drifts uniquely.
@@ -135,18 +118,47 @@
   }
 }
 
-/* Product-assembly: pieces fly in from an offset + settle. JS toggles .is-assembled. */
-.assemble {
+/* ── AssemblyScene: fixed page-wide biryani background ──
+   Pre-JS / no-JS fallback (data-scroll="off"): show the finished photo and
+   hide the pieces, so a slow or failed bundle can never leave a scattered,
+   broken-looking dish. Once JS is ready it sets data-scroll="on" and writes
+   each piece's transform/opacity inline from scroll progress. */
+.pa-scene-piece {
   opacity: 0;
-  transform: translate3d(var(--a-x, 0), var(--a-y, 40px), 0) scale(var(--a-scale, 0.9)) rotate(var(--a-rot, 0deg));
-  transition:
-    opacity 0.7s ease-out,
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
 }
-.assemble.is-assembled {
+/* Circle clip so the resting photo matches the circular union of the wedges —
+   otherwise the dish snaps from a circle to a hard square as it finishes. */
+.pa-scene-final {
   opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  clip-path: circle(50% at 50% 50%);
+}
+.pa-scene[data-scroll="on"] .pa-scene-final {
+  opacity: 0; /* JS raises this back to 1 near the end of the page. */
+}
+
+/* Scroll cue — the little mouse dot bobs to invite scrolling. */
+@keyframes scroll-cue-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+.scroll-cue-dot {
+  animation: scroll-cue-bob 1.8s ease-in-out infinite;
+}
+
+/* Hero copy: each line flies in from an offset and settles. */
+@keyframes assemble-in {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--a-x, 0), var(--a-y, 40px), 0) scale(var(--a-scale, 0.9))
+      rotate(var(--a-rot, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+.assemble {
+  animation: assemble-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 :root {
@@ -260,8 +272,16 @@
   .assemble {
     opacity: 1;
     transform: none;
+    animation: none !important;
   }
   .hero-particle {
     display: none;
+  }
+  /* AssemblyScene: present the finished dish, never a scatter. */
+  .pa-scene-piece {
+    display: none;
+  }
+  .pa-scene-final {
+    opacity: 1 !important;
   }
 }

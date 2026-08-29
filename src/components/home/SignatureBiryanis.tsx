@@ -8,12 +8,13 @@ export function SignatureBiryanis() {
   if (signatureBiryanis.length === 0) return null;
 
   return (
-    <section aria-labelledby="signature-heading" className="bg-cream-100/60 py-16 sm:py-24">
+    <section aria-labelledby="signature-heading" className="py-16 sm:py-24">
       <div className="container-px mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Crafted with care"
           title="Our Signature Biryanis"
           description="Slow-cooked on dum with aromatic spices and premium basmati — these are the dishes our guests come back for."
+          tone="dark"
         />
 
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">

@@ -72,23 +72,10 @@ export const galleryImages: GalleryImage[] = [
     category: "Food",
   },
   {
-    id: "g10",
-    src: img("photo-1594007654729-407eedc4be65"),
-    alt: "Neatly packed takeaway biryani boxes ready for delivery",
-    category: "Packaging",
-    tall: true,
-  },
-  {
     id: "g11",
     src: "/images/menu/chicken-biryani.jpg",
     alt: "Chicken biryani close-up showing layered saffron rice",
     category: "Biryani",
-  },
-  {
-    id: "g12",
-    src: img("photo-1594007654729-407eedc4be65"),
-    alt: "Freshly packed biryani ready for pickup",
-    category: "Packaging",
   },
 ];
 

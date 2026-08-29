@@ -7,6 +7,7 @@ export function SectionHeading({
   align = "center",
   className,
   as: Tag = "h2",
+  tone = "light",
 }: {
   eyebrow?: string;
   title: string;
@@ -14,7 +15,10 @@ export function SectionHeading({
   align?: "center" | "left";
   className?: string;
   as?: "h1" | "h2";
+  /** "dark" recolours the text for placement over a dark background. */
+  tone?: "light" | "dark";
 }) {
+  const dark = tone === "dark";
   return (
     <div
       className={cn(
@@ -24,21 +28,32 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">
+        <span
+          className={cn(
+            "inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em]",
+            dark ? "text-gold-300" : "text-gold-600"
+          )}
+        >
           <span className="h-px w-6 bg-gold-400" aria-hidden="true" />
           {eyebrow}
         </span>
       )}
       <Tag
         className={cn(
-          "mt-3 text-3xl text-charcoal-900 text-balance sm:text-4xl",
+          "mt-3 text-3xl text-balance sm:text-4xl",
+          dark ? "text-cream-50" : "text-charcoal-900",
           Tag === "h1" && "text-4xl sm:text-5xl"
         )}
       >
         {title}
       </Tag>
       {description && (
-        <p className="mt-4 text-base leading-relaxed text-charcoal-500">
+        <p
+          className={cn(
+            "mt-4 text-base leading-relaxed",
+            dark ? "text-cream-100/80" : "text-charcoal-500"
+          )}
+        >
           {description}
         </p>
       )}
