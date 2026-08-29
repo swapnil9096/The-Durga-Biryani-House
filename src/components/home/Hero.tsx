@@ -1,60 +1,34 @@
 import { Button } from "@/components/ui/Button";
-import { SmartImage } from "@/components/ui/SmartImage";
 import { DirectionsButton } from "@/components/ui/ActionButtons";
 import { restaurant } from "@/config/restaurant";
 import { featuredOffer } from "@/data/offers";
+import { LiveHeroBackground } from "./LiveHeroBackground";
+import { HeroAssemble } from "./HeroAssemble";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-charcoal-950">
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <SmartImage
-          src="/images/menu/hero-biryani.jpg"
-          alt="Aromatic dum biryani platter garnished with lime and saffron rice"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-charcoal-950/95 via-charcoal-950/80 to-charcoal-950/40"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-transparent to-transparent"
-          aria-hidden="true"
-        />
-      </div>
+      <LiveHeroBackground />
 
       <div className="container-px relative mx-auto flex min-h-[86vh] max-w-7xl flex-col justify-center py-20 lg:min-h-[90vh]">
         <div className="max-w-2xl">
-          <span className="inline-flex animate-slide-down items-center gap-2 rounded-full bg-maroon-700/90 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-cream-50 ring-1 ring-gold-400/40">
+          <HeroAssemble as="span" x="-24px" delay={0} className="inline-flex items-center gap-2 rounded-full bg-maroon-700/90 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-cream-50 ring-1 ring-gold-400/40">
             🔥 {featuredOffer.highlight}
-          </span>
+          </HeroAssemble>
 
-          <h1 className="mt-6 animate-slide-up font-display text-4xl font-extrabold leading-[1.05] text-cream-50 text-balance sm:text-5xl lg:text-6xl">
+          <HeroAssemble as="h1" y="48px" scale={0.92} delay={100} className="mt-6 font-display text-4xl font-extrabold leading-[1.05] text-cream-50 text-balance sm:text-5xl lg:text-6xl">
             {restaurant.name}
-          </h1>
+          </HeroAssemble>
 
-          <p
-            className="mt-4 animate-slide-up font-display text-xl italic text-gold-300 sm:text-2xl"
-            style={{ animationDelay: "80ms" }}
-          >
+          <HeroAssemble as="p" x="32px" delay={220} className="mt-4 font-display text-xl italic text-gold-300 sm:text-2xl">
             {restaurant.tagline}
-          </p>
+          </HeroAssemble>
 
-          <p
-            className="mt-5 max-w-xl animate-slide-up text-base leading-relaxed text-cream-100/85 sm:text-lg"
-            style={{ animationDelay: "160ms" }}
-          >
+          <HeroAssemble as="p" y="32px" delay={320} className="mt-5 max-w-xl text-base leading-relaxed text-cream-100/85 sm:text-lg">
             {restaurant.description}
-          </p>
+          </HeroAssemble>
 
-          <div
-            className="mt-8 flex animate-slide-up flex-wrap items-center gap-3"
-            style={{ animationDelay: "240ms" }}
-          >
+          <HeroAssemble as="div" y="40px" scale={0.94} delay={440} className="mt-8 flex flex-wrap items-center gap-3">
             <Button href="/menu" size="lg" variant="gold">
               Order Now
             </Button>
@@ -71,13 +45,10 @@ export function Hero() {
               variant="ghost"
               className="text-cream-100 hover:bg-white/10"
             />
-          </div>
+          </HeroAssemble>
 
           {/* Trust strip */}
-          <ul
-            className="mt-10 flex animate-fade-in flex-wrap gap-x-6 gap-y-2 text-sm text-cream-100/80"
-            style={{ animationDelay: "320ms" }}
-          >
+          <HeroAssemble as="ul" y="24px" delay={560} className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-cream-100/80">
             <li className="flex items-center gap-2">
               <Dot /> Dum-cooked fresh daily
             </li>
@@ -87,7 +58,7 @@ export function Hero() {
             <li className="flex items-center gap-2">
               <Dot /> Hygienic kitchen
             </li>
-          </ul>
+          </HeroAssemble>
         </div>
       </div>
     </section>

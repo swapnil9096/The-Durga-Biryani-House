@@ -1,5 +1,4 @@
 import { restaurant } from "@/config/restaurant";
-import { cn } from "@/lib/utils";
 
 /**
  * Renders social icons only for platforms with a real URL configured.

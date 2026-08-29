@@ -30,7 +30,6 @@ export default async function OgImage() {
           fontFamily: "Georgia, serif",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logoSrc} alt={restaurant.name} width={440} height={440} />
         <div style={{ fontSize: 30, color: "#d8cbbd", marginTop: 16 }}>
           Kharadi, Pune
