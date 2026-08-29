@@ -23,10 +23,10 @@ export function Logo({
     >
       <span className="overflow-hidden rounded-xl ring-1 ring-gold-400/30 transition-transform duration-300 group-hover:scale-105">
         <Image
-          src="/images/brand/logo.webp"
+          src="/images/brand/logo-emblem.png"
           alt={restaurant.name}
-          width={900}
-          height={600}
+          width={1536}
+          height={1024}
           priority
           className="block h-12 w-auto sm:h-14"
         />
